@@ -1,384 +1,567 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="h-full">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ENEM Fácil</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    /* --- Modo escuro --- */
-    body.dark-mode {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-
-    body.dark-mode header {
-      background: linear-gradient(135deg, #00364d, #004d66);
-    }
-
-    body.dark-mode nav {
-      background: #00364d;
-    }
-
-    body.dark-mode nav a {
-      color: #b0c7d4;
-    }
-
-    body.dark-mode nav a:hover {
-      color: #90e0ef;
-    }
-
-    body.dark-mode section {
-      background: #1e1e1e;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-
-    body.dark-mode section h2 {
-      color: #90e0ef;
-      border-bottom: 2px solid #90e0ef;
-    }
-
-    body.dark-mode ul li {
-      background: #2a2a2a;
-    }
-
-    body.dark-mode .card {
-      background: #2a2a2a;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    }
-
-    body.dark-mode footer {
-      background: #004d66;
-    }
-
-    /* --- Cabeçalho --- */
-    header {
-      background: linear-gradient(135deg, #005f86, #0077b6);
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      position: relative;
-    }
-
-    #dark-mode-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    #dark-mode-toggle:hover {
-      color: #90e0ef;
-    }
-
-    header h1 {
-      font-size: 2rem;
-      margin: 0;
-    }
-
-    header p {
-      font-size: 1.1rem;
-      margin: 10px 0 0;
-    }
-
-    /* --- Navegação --- */
-    nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      background: #005f86;
-      padding: 1rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 8px 15px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #90e0ef;
-    }
-
-    /* --- Seções --- */
-    section {
-      padding: 20px;
-      max-width: 1000px;
-      margin: 30px auto;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s, box-shadow 0.3s;
-    }
-
-    section h2 {
-      color: #0077b6;
-      text-align: center;
-      border-bottom: 2px solid #0077b6;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    ul li {
-      padding: 10px;
-      background: #e0f7fa;
-      margin: 5px 0;
-      border-radius: 5px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: #0077b6;
-      color: white;
-      margin-top: 30px;
-      font-size: 0.9rem;
-    }
-
-    .hero-image {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      object-fit: cover;
-      margin-top: 20px;
-      border-bottom: 3px solid #0077b6;
-    }
-
-    /* --- Cards da Equipe --- */
-    .cards-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .card {
-      background: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      flex: 1 1 250px;
-      text-align: center;
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card img {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 15px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    /* --- Botão centralizado --- */
-    .container-ajuda {
-      text-align: center;
-      padding: 20px;
-    }
-
-    .container-ajuda a {
-      text-decoration: none;
-      color: #fff;
-      background-color: #007bff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-      display: inline-block;
-    }
-
-    .container-ajuda a:hover {
-      background-color: #0056b3;
-    }
-
-    /* --- Responsividade --- */
-    @media (max-width: 768px) {
-      header {
-        padding: 1.5rem;
-      }
-
-      header h1 {
-        font-size: 1.8rem;
-      }
-
-      header p {
-        font-size: 1rem;
-      }
-
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      nav a {
-        margin: 5px 0;
-      }
-
-      .card {
-        flex: 1 1 90%;
-      }
-
-      section {
-        margin: 20px 10px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.5rem;
-      }
-
-      header p {
-        font-size: 0.95rem;
-      }
-
-      #dark-mode-toggle {
-        top: 10px;
-        right: 10px;
-        font-size: 20px;
-      }
-
-      .hero-image {
-        max-height: 250px;
-      }
-
-      .card img {
-        width: 80px;
-        height: 80px;
-      }
-
-      .container-ajuda a {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <button id="dark-mode-toggle" aria-label="Alternar modo escuro">🌙</button>
-    <h1>ENEM Fácil</h1>
-    <p>Dicas, cursos e conteúdos para melhorar seu desempenho no ENEM</p>
-  </header>
-
-  <nav>
-    <a href="#sobre">Sobre</a>
-    <a href="#equipe">Equipe</a>
-    <a href="#contato">Contato</a>
-  </nav>
-
-  <img class="hero-image" src="/img/imagemrepresentativa3.jpeg" alt="Pessoas estudando">
-
-  <section id="sobre">
-    <h2>Sobre a Instituição</h2>
-    <p>O ENEM Fácil é um projeto educacional que busca auxiliar estudantes de todo o Brasil com conteúdo de qualidade, simulados e dicas exclusivas para conquistar a tão sonhada vaga na universidade.</p>
-  </section>
-
-  <section id="ajuda">
-    <div class="container-ajuda">
-      <h2>Como podemos ajudar?</h2>
-      <a href="/front/centrodeestudo.html">Clique aqui para podermos te ajudar!</a>
-    </div>
-  </section>
-
-  <section id="equipe">
-    <h2>Nossa Equipe</h2>
-    <div class="cards-container">
-      <div class="card">
-        <img src="/img/Castelo.png" alt="Nicolas Castelo">
-        <h3>Nicolas Castelo</h3>
-        <p>Programmer</p>
-      </div>
-      <div class="card">
-        <img src="/img/Santiago.jpg" alt="Gabriel Santiago">
-        <h3>Gabriel Santiago</h3>
-        <p>Manager do projeto</p>
-      </div>
-      <div class="card">
-        <img src="/img/Rayca.jpg" alt="Rayca Almeida">
-        <h3>Rayca Almeida</h3>
-        <p>Designer</p>
-      </div>
-      <div class="card">
-        <img src="/img/susu.jpg" alt="Suellen">
-        <h3>Suellen</h3>
-        <p>Designer</p>
-      </div>
-      <div class="card">
-        <img src="/img/bilau2.jpg" alt="Gabriel Pereira">
-        <h3>Gabriel Pereira</h3>
-        <p>Vice-manager</p>
-      </div>
-      <div class="card">
-        <img src="/img/KAuã.png" alt="Kauã Maciel">
-        <h3>Kauã Maciel</h3>
-        <p>Programmer</p>
-      </div>
-      <div class="card">
-        <img src="/img/willian.jpg" alt="Wilian Borges">
-        <h3>Wilian Borges</h3>
-        <p>Programmer</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="contato">
-    <h2>Entre em Contato</h2>
-    <p>Envie um e-mail para <strong>enemfácilCL@gmail.com</strong></p>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 ENEM Fácil. Todos os direitos reservados.</p>
-  </footer>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const toggleButton = document.getElementById("dark-mode-toggle");
-      const body = document.body;
-      const heroImage = document.querySelector(".hero-image");
-      const darkModeEnabled = localStorage.getItem("darkMode") === "enabled";
-
-      if (darkModeEnabled) {
-        body.classList.add("dark-mode");
-        heroImage.style.filter = "brightness(0.7)";
-      }
-
-      toggleButton.addEventListener("click", () => {
-        body.classList.toggle("dark-mode");
-        if (body.classList.contains("dark-mode")) {
-          localStorage.setItem("darkMode", "enabled");
-          heroImage.style.filter = "brightness(0.7)";
-        } else {
-          localStorage.setItem("darkMode", "disabled");
-          heroImage.style.filter = "brightness(1)";
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redação - ENEM Fácil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
         }
-      });
-    });
-  </script>
-</body>
+    </script>
+</head>
+<body class="h-full bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">EF</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">ENEM Fácil</h1>
+                        <p class="text-sm text-blue-600 dark:text-blue-400">Redação</p>
+                    </div>
+                </div>
+                <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200">
+                    <svg id="sunIcon" class="w-5 h-5 text-gray-600 dark:text-gray-300 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg id="moonIcon" class="w-5 h-5 text-gray-600 dark:text-gray-300 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Navigation Tabs -->
+        <div class="mb-8">
+            <nav class="flex space-x-1 bg-white dark:bg-gray-800 p-1 rounded-lg shadow-md">
+                <button class="tab-btn active px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-tab="temas">
+                    📝 Temas Atuais
+                </button>
+                <button class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-tab="conectivos">
+                    🔗 Conectivos
+                </button>
+                <button class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-tab="sites">
+                    🌐 Sites de Correção
+                </button>
+                <button class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-tab="modelo">
+                    📋 Modelo & Competências
+                </button>
+                <button class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-tab="comunidade">
+                    👥 Comunidade
+                </button>
+            </nav>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="content" class="fade-in">
+            <!-- Temas Atuais -->
+            <div id="temas" class="tab-content">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">🔥 Temas Atuais e Possíveis</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">Temas relevantes que podem aparecer no ENEM e outros concursos</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-semibold text-blue-600 dark:text-blue-400">🌍 Meio Ambiente</h3>
+                            <div class="space-y-3">
+                                <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg card-hover">
+                                    <h4 class="font-medium text-gray-900 dark:text-white">Mudanças Climáticas</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">Aquecimento global, sustentabilidade, energias renováveis</p>
+                                </div>
+                                <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg card-hover">
+                                    <h4 class="font-medium text-gray-900 dark:text-white">Preservação Ambiental</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">Desmatamento, biodiversidade, recursos hídricos</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-semibold text-purple-600 dark:text-purple-400">👥 Sociedade</h3>
+                            <div class="space-y-3">
+                                <div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg card-hover">
+                                    <h4 class="font-medium text-gray-900 dark:text-white">Inclusão Digital</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">Acesso à internet, educação digital, exclusão social</p>
+                                </div>
+                                <div class="p-4 bg-pink-50 dark:bg-pink-900/20 rounded-lg card-hover">
+                                    <h4 class="font-medium text-gray-900 dark:text-white">Saúde Mental</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">Ansiedade, depressão, bem-estar psicológico</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conectivos -->
+            <div id="conectivos" class="tab-content hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">🔗 Conectivos Essenciais</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">Conectivos organizados por função para melhorar a coesão do seu texto</p>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                            <h3 class="font-semibold text-blue-700 dark:text-blue-300 mb-3">➕ Adição</h3>
+                            <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                <li>• Além disso</li>
+                                <li>• Ademais</li>
+                                <li>• Outrossim</li>
+                                <li>• Também</li>
+                                <li>• Igualmente</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
+                            <h3 class="font-semibold text-red-700 dark:text-red-300 mb-3">⚡ Oposição</h3>
+                            <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                <li>• Entretanto</li>
+                                <li>• Contudo</li>
+                                <li>• Todavia</li>
+                                <li>• No entanto</li>
+                                <li>• Porém</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                            <h3 class="font-semibold text-green-700 dark:text-green-300 mb-3">🎯 Conclusão</h3>
+                            <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                <li>• Portanto</li>
+                                <li>• Logo</li>
+                                <li>• Assim</li>
+                                <li>• Por conseguinte</li>
+                                <li>• Dessa forma</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg">
+                            <h3 class="font-semibold text-yellow-700 dark:text-yellow-300 mb-3">💡 Explicação</h3>
+                            <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                <li>• Isto é</li>
+                                <li>• Ou seja</li>
+                                <li>• Por exemplo</li>
+                                <li>• A saber</li>
+                                <li>• Nesse sentido</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+                            <h3 class="font-semibold text-purple-700 dark:text-purple-300 mb-3">🔄 Sequência</h3>
+                            <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                <li>• Primeiramente</li>
+                                <li>• Em seguida</li>
+                                <li>• Posteriormente</li>
+                                <li>• Finalmente</li>
+                                <li>• Por fim</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-lg">
+                            <h3 class="font-semibold text-indigo-700 dark:text-indigo-300 mb-3">🎪 Comparação</h3>
+                            <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                <li>• Assim como</li>
+                                <li>• Da mesma forma</li>
+                                <li>• Analogamente</li>
+                                <li>• Similarmente</li>
+                                <li>• Tal qual</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sites de Correção -->
+            <div id="sites" class="tab-content hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">🌐 Sites para Correção de Redação</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">Plataformas recomendadas para corrigir e melhorar suas redações</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-lg text-white card-hover">
+                            <h3 class="text-xl font-bold mb-2">📝 Redação Online</h3>
+                            <p class="mb-4 opacity-90">Correção detalhada seguindo critérios do ENEM</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Gratuito</span>
+                                <button onclick="window.open('https://redacaoonline.com.br', '_blank')" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                                    Visitar Site
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-green-500 to-green-600 p-6 rounded-lg text-white card-hover">
+                            <h3 class="text-xl font-bold mb-2">✍️ Imaginie</h3>
+                            <p class="mb-4 opacity-90">Plataforma completa com correções profissionais</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Freemium</span>
+                                <button onclick="window.open('https://imaginie.com.br', '_blank')" class="bg-white text-green-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                                    Visitar Site
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-purple-500 to-purple-600 p-6 rounded-lg text-white card-hover">
+                            <h3 class="text-xl font-bold mb-2">🎯 Descomplica</h3>
+                            <p class="mb-4 opacity-90">Correções com feedback detalhado e dicas</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Pago</span>
+                                <button onclick="window.open('https://descomplica.com.br', '_blank')" class="bg-white text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                                    Visitar Site
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-orange-500 to-orange-600 p-6 rounded-lg text-white card-hover">
+                            <h3 class="text-xl font-bold mb-2">📚 Brasil Escola</h3>
+                            <p class="mb-4 opacity-90">Correções gratuitas e banco de redações</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Gratuito</span>
+                                <button onclick="window.open('https://brasilescola.uol.com.br', '_blank')" class="bg-white text-orange-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                                    Visitar Site
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modelo e Competências -->
+            <div id="modelo" class="tab-content hidden">
+                <div class="space-y-6">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">📋 Estrutura da Redação ENEM</h2>
+                        
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                                <h3 class="font-bold text-blue-700 dark:text-blue-300 mb-2">1️⃣ Introdução</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Apresentação do tema, contextualização e tese (7-8 linhas)</p>
+                            </div>
+                            <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                                <h3 class="font-bold text-green-700 dark:text-green-300 mb-2">2️⃣ Desenvolvimento</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Dois parágrafos com argumentos, dados e exemplos (14-16 linhas)</p>
+                            </div>
+                            <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+                                <h3 class="font-bold text-purple-700 dark:text-purple-300 mb-2">3️⃣ Conclusão</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Proposta de intervenção detalhada (7-8 linhas)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">🏆 As 5 Competências do ENEM</h2>
+                        
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-blue-500 pl-4 py-2">
+                                <h3 class="font-semibold text-gray-900 dark:text-white">Competência 1 - Norma Culta</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Domínio da modalidade escrita formal da língua portuguesa</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4 py-2">
+                                <h3 class="font-semibold text-gray-900 dark:text-white">Competência 2 - Compreensão do Tema</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Compreender a proposta de redação e aplicar conceitos das várias áreas de conhecimento</p>
+                            </div>
+                            <div class="border-l-4 border-yellow-500 pl-4 py-2">
+                                <h3 class="font-semibold text-gray-900 dark:text-white">Competência 3 - Argumentação</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Selecionar, relacionar, organizar e interpretar informações, fatos, opiniões e argumentos</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4 py-2">
+                                <h3 class="font-semibold text-gray-900 dark:text-white">Competência 4 - Coesão e Coerência</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Demonstrar conhecimento dos mecanismos linguísticos necessários para a construção da argumentação</p>
+                            </div>
+                            <div class="border-l-4 border-red-500 pl-4 py-2">
+                                <h3 class="font-semibold text-gray-900 dark:text-white">Competência 5 - Proposta de Intervenção</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Elaborar proposta de intervenção para o problema abordado, respeitando os direitos humanos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comunidade -->
+            <div id="comunidade" class="tab-content hidden">
+                <div class="space-y-6">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">👥 Comunidade de Redação</h2>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">Compartilhe suas redações e receba feedback da comunidade</p>
+                        
+                        <!-- Formulário de Postagem -->
+                        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">✍️ Postar Nova Redação</h3>
+                            <form id="redacaoForm" class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Título do Tema</label>
+                                    <input type="text" id="tituloRedacao" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="Ex: A importância da educação digital no Brasil">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Sua Redação</label>
+                                    <textarea id="textoRedacao" rows="8" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="Cole aqui o texto da sua redação..."></textarea>
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Sua Nota (opcional)</label>
+                                        <select id="notaRedacao" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+                                            <option value="">Selecione uma nota</option>
+                                            <option value="1000">1000 - Excelente</option>
+                                            <option value="900-999">900-999 - Muito Bom</option>
+                                            <option value="800-899">800-899 - Bom</option>
+                                            <option value="700-799">700-799 - Regular</option>
+                                            <option value="600-699">600-699 - Precisa Melhorar</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Seu Nome (opcional)</label>
+                                        <input type="text" id="nomeAutor" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="Como quer ser chamado?">
+                                    </div>
+                                </div>
+                                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200">
+                                    📝 Publicar Redação
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Lista de Redações -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">📚 Redações da Comunidade</h3>
+                        <div id="listaRedacoes" class="space-y-4">
+                            <!-- Redações serão inseridas aqui via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            html.classList.add('dark');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const theme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+        });
+        
+        // Tab Navigation
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        function updateTabStyles() {
+            tabButtons.forEach(btn => {
+                if (btn.classList.contains('active')) {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('text-gray-600', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-white');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('text-gray-600', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-white');
+                }
+            });
+        }
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.add('hidden'));
+                
+                // Add active class to clicked button and show corresponding content
+                button.classList.add('active');
+                document.getElementById(targetTab).classList.remove('hidden');
+                
+                updateTabStyles();
+            });
+        });
+        
+        // Initialize tab styles
+        updateTabStyles();
+        
+        // Sistema de Redações da Comunidade
+        let redacoes = JSON.parse(localStorage.getItem('redacoes')) || [];
+        
+        function salvarRedacoes() {
+            localStorage.setItem('redacoes', JSON.stringify(redacoes));
+        }
+        
+        function renderizarRedacoes() {
+            const lista = document.getElementById('listaRedacoes');
+            
+            if (redacoes.length === 0) {
+                lista.innerHTML = `
+                    <div class="text-center py-8 text-gray-500 dark:text-gray-400">
+                        <p class="text-lg mb-2">📝 Nenhuma redação postada ainda</p>
+                        <p>Seja o primeiro a compartilhar sua redação!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            lista.innerHTML = redacoes.map((redacao, index) => `
+                <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 card-hover">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 dark:text-white">${redacao.titulo}</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                Por: ${redacao.autor} • ${redacao.data}
+                                ${redacao.nota ? ` • Nota: ${redacao.nota}` : ''}
+                            </p>
+                        </div>
+                        <button onclick="removerRedacao(${index})" class="text-red-500 hover:text-red-700 text-sm">
+                            🗑️ Remover
+                        </button>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded text-sm text-gray-700 dark:text-gray-300 max-h-32 overflow-y-auto">
+                        ${redacao.texto.substring(0, 200)}${redacao.texto.length > 200 ? '...' : ''}
+                    </div>
+                    <div class="mt-3 flex items-center space-x-4">
+                        <button onclick="toggleTextoCompleto(${index})" class="text-blue-600 dark:text-blue-400 text-sm hover:underline">
+                            📖 Ver texto completo
+                        </button>
+                        <button onclick="darFeedback(${index})" class="text-green-600 dark:text-green-400 text-sm hover:underline">
+                            💬 Dar feedback
+                        </button>
+                    </div>
+                    <div id="feedback-${index}" class="mt-3 hidden">
+                        <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded">
+                            <textarea id="texto-feedback-${index}" placeholder="Deixe seu feedback construtivo..." class="w-full p-2 border rounded text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600" rows="3"></textarea>
+                            <div class="mt-2 flex space-x-2">
+                                <button onclick="salvarFeedback(${index})" class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                    Enviar
+                                </button>
+                                <button onclick="cancelarFeedback(${index})" class="bg-gray-500 text-white px-3 py-1 rounded text-sm hover:bg-gray-600">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    ${redacao.feedbacks && redacao.feedbacks.length > 0 ? `
+                        <div class="mt-3 space-y-2">
+                            <h5 class="text-sm font-medium text-gray-700 dark:text-gray-300">💬 Feedbacks:</h5>
+                            ${redacao.feedbacks.map(feedback => `
+                                <div class="bg-green-50 dark:bg-green-900/20 p-2 rounded text-sm">
+                                    <p class="text-gray-700 dark:text-gray-300">${feedback.texto}</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${feedback.data}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+        
+        function removerRedacao(index) {
+            if (confirm('Tem certeza que deseja remover esta redação?')) {
+                redacoes.splice(index, 1);
+                salvarRedacoes();
+                renderizarRedacoes();
+            }
+        }
+        
+        function toggleTextoCompleto(index) {
+            const redacao = redacoes[index];
+            alert(`Título: ${redacao.titulo}\n\n${redacao.texto}`);
+        }
+        
+        function darFeedback(index) {
+            const feedbackDiv = document.getElementById(`feedback-${index}`);
+            feedbackDiv.classList.toggle('hidden');
+        }
+        
+        function cancelarFeedback(index) {
+            const feedbackDiv = document.getElementById(`feedback-${index}`);
+            feedbackDiv.classList.add('hidden');
+            document.getElementById(`texto-feedback-${index}`).value = '';
+        }
+        
+        function salvarFeedback(index) {
+            const textoFeedback = document.getElementById(`texto-feedback-${index}`).value.trim();
+            
+            if (!textoFeedback) {
+                alert('Por favor, escreva um feedback antes de enviar.');
+                return;
+            }
+            
+            if (!redacoes[index].feedbacks) {
+                redacoes[index].feedbacks = [];
+            }
+            
+            redacoes[index].feedbacks.push({
+                texto: textoFeedback,
+                data: new Date().toLocaleDateString('pt-BR')
+            });
+            
+            salvarRedacoes();
+            renderizarRedacoes();
+            alert('Feedback enviado com sucesso! 🎉');
+        }
+        
+        // Form de Nova Redação
+        document.getElementById('redacaoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const titulo = document.getElementById('tituloRedacao').value.trim();
+            const texto = document.getElementById('textoRedacao').value.trim();
+            const nota = document.getElementById('notaRedacao').value;
+            const autor = document.getElementById('nomeAutor').value.trim() || 'Anônimo';
+            
+            if (!titulo || !texto) {
+                alert('Por favor, preencha o título e o texto da redação.');
+                return;
+            }
+            
+            const novaRedacao = {
+                titulo,
+                texto,
+                nota,
+                autor,
+                data: new Date().toLocaleDateString('pt-BR'),
+                feedbacks: []
+            };
+            
+            redacoes.unshift(novaRedacao);
+            salvarRedacoes();
+            renderizarRedacoes();
+            
+            // Limpar formulário
+            document.getElementById('redacaoForm').reset();
+            
+            alert('Redação publicada com sucesso! 🎉');
+        });
+        
+        // Inicializar lista de redações
+        renderizarRedacoes();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98c68d7de2fef1db',t:'MTc2MDEwMzg2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
